@@ -244,6 +244,24 @@ export type Database = {
         }
         Relationships: []
       }
+      rickroll_check: {
+        Row: {
+          game_id: string | null
+          id: number
+          was_rickrolled: boolean | null
+        }
+        Insert: {
+          game_id?: string | null
+          id?: never
+          was_rickrolled?: boolean | null
+        }
+        Update: {
+          game_id?: string | null
+          id?: never
+          was_rickrolled?: boolean | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       game_results: {
@@ -262,6 +280,14 @@ export type Database = {
           quiz_set_id: string
           body: string
           order: number
+          choices: Json[]
+        }
+        Returns: undefined
+      }
+      append_question: {
+        Args: {
+          quiz_set_id: string
+          body: string
           choices: Json[]
         }
         Returns: undefined

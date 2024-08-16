@@ -1,6 +1,8 @@
 import { Participant, supabase } from '@/types/types'
 import { useQRCode } from 'next-qrcode'
 
+let isVideoOpened = false;
+
 export default function Lobby({
   participants: participants,
   gameId,
@@ -11,6 +13,22 @@ export default function Lobby({
   const { Canvas } = useQRCode()
 
   const onClickStartGame = async () => {
+    // Check if it was rickrolled yet:
+
+    const { data: rickroll, error: rickrollError } = await supabase
+      .from('rickroll_check')
+      .select('*')
+      .eq('game_id', gameId).limit(1).maybeSingle();
+    if (rickrollError) {
+      return alert(rickrollError.message);
+    }
+    if (rickroll == null) {
+      window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+      // updates the table with the rickroll to true
+      const { data, error } = await supabase
+        .from('rickroll_check')
+        .insert({ game_id: gameId, was_rickrolled: true });
+    }
     const { data, error } = await supabase
       .from('games')
       .update({ phase: 'quiz' })
