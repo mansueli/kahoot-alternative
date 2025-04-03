@@ -63,7 +63,7 @@ export default function Home() {
                   className="bg-green-500 text-white py-1 px-4 rounded"
                   onClick={() => startGame(quizSet.id)}
                 >
-                  Start Game
+                  Começar
                 </button>
               </div>
             </div>

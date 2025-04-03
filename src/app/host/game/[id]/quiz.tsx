@@ -101,7 +101,7 @@ export default function Quiz({
             className="p-2 bg-white text-black rounded hover:bg-gray-200"
             onClick={getNextQuestion}
           >
-            Next
+            Próxima
           </button>
         )}
       </div>
@@ -130,7 +130,7 @@ export default function Quiz({
             </div>
             <div className="text-center">
               <div className="text-6xl pb-4">{answers.length}</div>
-              <div className="text-3xl">Answers</div>
+              <div className="text-3xl">Respostas</div>
             </div>
           </div>
         )}
